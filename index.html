@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur d'Eutectiques n-aires</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #1a202c 100%);
+            min-height: 100vh;
+            color: #f7fafc;
+            font-weight: 400;
+            letter-spacing: -0.025em;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cbd5e0;
+            margin-bottom: 40px;
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 0.025em;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .main-panel {
+            background: rgba(255,255,255,0.97);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: slideInUp 0.8s ease-out 0.6s both;
+            color: #2d3748;
+        }
+
+        .controls-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .material-selector {
+            flex: 2;
+            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .material-selector:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .material-selector h3 {
+            color: #2d3748;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.025em;
+        }
+
+        .dropdown-container {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 16px 0;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(113, 128, 150, 0.15);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        .dropdown-container:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+            border-color: rgba(66, 153, 225, 0.3);
+        }
+
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .dropdown-header label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+
+        .material-select {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid rgba(113, 128, 150, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Lexend Deca', sans-serif;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            color: #2d3748;
+        }
+
+        .material-select:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .material-select option {
+            padding: 10px;
+        }
+
+        .material-info {
+            margin-top: 16px;
+            padding: 16px;
+            background: linear-gradient(145deg, #edf2f7, #f7fafc);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: #4a5568;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            border: 1px solid rgba(113, 128, 150, 0.1);
+        }
+
+        .material-info.show {
+            display: block;
+        }
+
+        .remove-btn {
+            background: linear-gradient(145deg, #f56565, #e53e3e);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: 'Lexend Deca', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+        }
+
+        .remove-btn:hover {
+            background: linear-gradient(145deg, #e53e3e, #c53030);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+        }
+
+        .add-material-btn {
+            background: linear-gradient(145deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(72, 187, 120, 0.3);
+        }
+
+        .add-material-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(72, 187, 120, 0.4);
+            background: linear-gradient(145deg, #38a169, #2f855a);
+        }
+
+        .random-btn {
+            background: linear-gradient(145deg, #805ad5, #6b46c1);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(128, 90, 213, 0.3);
+        }
+
+        .random-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(128, 90, 213, 0.4);
+            background: linear-gradient(145deg, #6b46c1, #553c9a);
+        }
+
+        .random-options {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            animation: slideInDown 0.3s ease-out;
+        }
+
+        .random-options.show {
+            display: block;
+        }
+
+        .random-controls {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .random-controls label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.95rem;
+        }
+
+        .random-select {
+            padding: 8px 12px;
+            border: 2px solid rgba(113, 128, 150, 0.2);
+            border-radius: 8px;
+            font-family: 'Lexend Deca', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .random-select:focus {
+            outline: none;
+            border-color: #805ad5;
+            box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.1);
+        }
+
+        .generate-btn {
+            background: linear-gradient(145deg, #805ad5, #6b46c1);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .generate-btn:hover {
+            background: linear-gradient(145deg, #6b46c1, #553c9a);
+            transform: translateY(-1px);
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calculation-panel {
+            flex: 1;
+            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .calculation-panel h3 {
+            color: #2d3748;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(145deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(66, 153, 225, 0.4);
+            letter-spacing: -0.025em;
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .calculate-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(66, 153, 225, 0.5);
+            background: linear-gradient(145deg, #3182ce, #2b6cb0);
+        }
+
+        .calculate-btn:disabled {
+            background: linear-gradient(145deg, #a0aec0, #718096);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .reset-btn {
+            background: linear-gradient(145deg, #ed8936, #dd6b20);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(237, 137, 54, 0.3);
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
+            background: linear-gradient(145deg, #dd6b20, #c05621);
+        }
+
+        .results {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 24px;
+            border-radius: 16px;
+            border-left: 4px solid #4299e1;
+            margin-top: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .results.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .composition-diagram {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .composition-diagram h3 {
+            color: #2d3748;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            text-align: center;
+        }
+
+        .pie-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .pie-chart {
+            max-width: 400px;
+            max-height: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+        }
+        
+        @media (max-width: 768px) {
+            .pie-chart {
+                max-width: 300px;
+                max-height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pie-chart {
+                max-width: 250px;
+                max-height: 250px;
+            }
+        }
+
+        .center-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .temperature-display {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 8px 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            min-width: 80px;
+        }
+
+        .temp-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .temp-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a202c;
+            line-height: 1;
+        }
+
+        .legend {
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            max-width: 600px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .legend-item.highlight {
+            background: rgba(66, 153, 225, 0.1);
+            border-color: rgba(66, 153, 225, 0.3);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .legend-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .legend-percentage {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-left: 4px;
+        }
+
+        .pie-slice {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pie-slice:hover {
+            filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .slice-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            fill: #1a202c;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .axis {
+            position: absolute;
+            background: #333;
+        }
+
+        .axis-x {
+            bottom: 80px;
+            left: 80px;
+            right: 80px;
+            height: 2px;
+        }
+
+        .axis-y {
+            left: 80px;
+            bottom: 80px;
+            top: 80px;
+            width: 2px;
+        }
+
+        .eutectic-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ff4757;
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        .eutectic-point:hover {
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .phase-line {
+            position: absolute;
+            background: #2196f3;
+            height: 3px;
+            transform-origin: left center;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+        }
+
+        .label {
+            position: absolute;
+            background: rgba(255,255,255,0.75);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #1a202c;
+            border: 1px solid rgba(113, 128, 150, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+            white-space: nowrap;
+        }
+
+        .axis-label {
+            position: absolute;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4); }
+            50% { box-shadow: 0 3px 20px rgba(255, 71, 87, 0.8); }
+            100% { box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .formula-display {
+            background: linear-gradient(145deg, #edf2f7, #f7fafc);
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 1rem;
+            margin: 20px 0;
+            color: #2d3748;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nomenclature {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nomenclature h3 {
+            color: #2d3748;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .nomenclature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .nomenclature-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .nomenclature-symbol {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(113, 128, 150, 0.2);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            font-family: 'Lexend Deca', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3748;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .organic { background: #28a745; }
+        .salt { background: #dc3545; }
+        .metal { background: #6c757d; }
+        .nitrate { background: #ffc107; color: #212529; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 12px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 24px;
+            }
+            
+            .main-panel {
+                padding: 20px 16px;
+            }
+            
+            .controls-section {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            .material-selector,
+            .calculation-panel {
+                padding: 20px;
+            }
+            
+            .material-selector h3,
+            .calculation-panel h3,
+            .composition-diagram h3,
+            .nomenclature h3 {
+                font-size: 1.3rem;
+            }
+            
+            .dropdown-container {
+                padding: 16px;
+            }
+            
+            .material-select {
+                padding: 12px 14px;
+                font-size: 0.95rem;
+            }
+            
+            .add-material-btn,
+            .random-btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            
+            .calculate-btn {
+                padding: 14px 28px;
+                font-size: 1.1rem;
+            }
+            
+            .reset-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            
+            .pie-chart {
+                max-width: 300px;
+                max-height: 300px;
+            }
+            
+            .legend {
+                margin-top: 16px;
+                gap: 12px;
+            }
+            
+            .legend-item {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .temperature-display {
+                padding: 6px 12px;
+                min-width: 70px;
+            }
+            
+            .temp-value {
+                font-size: 1rem;
+            }
+            
+            .temp-label {
+                font-size: 0.65rem;
+            }
+            
+            .composition-diagram,
+            .nomenclature {
+                padding: 20px 16px;
+            }
+            
+            .nomenclature-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .nomenclature-item {
+                padding: 6px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px 8px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-panel {
+                padding: 16px 12px;
+            }
+            
+            .material-selector,
+            .calculation-panel,
+            .composition-diagram,
+            .nomenclature {
+                padding: 16px 12px;
+            }
+            
+            .dropdown-container {
+                padding: 12px;
+                margin: 12px 0;
+            }
+            
+            .pie-chart {
+                max-width: 250px;
+                max-height: 250px;
+            }
+            
+            .legend {
+                gap: 8px;
+            }
+            
+            .legend-item {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+            
+            .legend-text {
+                font-size: 0.8rem;
+            }
+            
+            .legend-percentage {
+                font-size: 0.75rem;
+            }
+            
+            .temperature-display {
+                padding: 4px 8px;
+                min-width: 60px;
+            }
+            
+            .temp-value {
+                font-size: 0.9rem;
+            }
+            
+            .temp-label {
+                font-size: 0.6rem;
+            }
+            
+            .random-options {
+                padding: 12px;
+            }
+            
+            .random-controls {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            
+            .random-select {
+                width: 100%;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculateur d'Eutectiques n-aires</h1>
+        <p class="subtitle">Application aux liquides ioniques et mélanges fusibles</p>
+        
+        <div class="main-panel">
+            <div class="controls-section">
+                <div class="material-selector">
+                    <h3>🧪 Sélecteur de Matériaux</h3>
+                    <div id="materialDropdowns">
+                        <!-- Dropdowns seront ajoutés ici -->
+                    </div>
+                    <button class="add-material-btn" id="addMaterialBtn">
+                        ➕ Ajouter un matériau
+                    </button>
+                    
+                    <button class="random-btn" id="randomBtn">
+                        🎲 Sélection aléatoire
+                    </button>
+                    
+                    <div class="random-options" id="randomOptions">
+                        <div class="random-controls">
+                            <label for="materialCount">Nombre de matériaux:</label>
+                            <select class="random-select" id="materialCount">
+                                <option value="3">3 matériaux</option>
+                                <option value="4">4 matériaux</option>
+                                <option value="5">5 matériaux</option>
+                            </select>
+                        </div>
+                        <div class="random-controls">
+                            <label for="categoryFilter">Catégorie:</label>
+                            <select class="random-select" id="categoryFilter">
+                                <option value="all">Toutes catégories</option>
+                                <option value="inorganic">Inorganiques seulement</option>
+                                <option value="organic">Organiques seulement</option>
+                                <option value="mixed">Mélange organiques/inorganiques</option>
+                            </select>
+                        </div>
+                        <button class="generate-btn" id="generateBtn">
+                            ⚡ Générer la sélection
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculation-panel">
+                    <h3>⚗️ Calcul Eutectique</h3>
+                    
+                    <button class="reset-btn" id="resetBtn">
+                        🔄 Réinitialiser
+                    </button>
+                    
+                    <button class="calculate-btn" id="calculateBtn">
+                        Calculer l'Eutectique
+                    </button>
+                    
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Calcul en cours...</p>
+                    </div>
+                    
+                    <div class="results" id="results">
+                        <!-- Résultats seront affichés ici -->
+                    </div>
+                    
+                    <div class="formula-display">
+                        <strong>Équation utilisée:</strong><br>
+                        ln(x<sub>i</sub>) + H<sub>i</sub>/R × (1/T - 1/T<sub>i</sub>°) = 0
+                    </div>
+                </div>
+            </div>
+            
+            <div class="composition-diagram">
+                <h3>🍰 Diagramme de Composition Eutectique</h3>
+                <div class="pie-container" id="pieContainer">
+                    <svg class="pie-chart" id="pieChart" width="400" height="400" viewBox="0 0 400 400">
+                        <!-- Le diagramme circulaire sera généré ici -->
+                    </svg>
+                    <div class="center-info" id="centerInfo">
+                        <div class="temperature-display">
+                            <span class="temp-label">Température</span>
+                            <span class="temp-value" id="tempValue">--</span>
+                        </div>
+                    </div>
+                    <div class="legend" id="legend">
+                        <!-- Légende sera générée ici -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nomenclature">
+                <h3>📝 Nomenclature</h3>
+                <div class="nomenclature-grid">
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">G</span>
+                        <span>Enthalpie libre (J/mol/K)</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">μ</span>
+                        <span>Potentiel chimique</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">R</span>
+                        <span>Constante des gaz parfaits (8,314510 J/mol/K)</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">H°</span>
+                        <span>Enthalpie de fusion (J/mol)</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">T</span>
+                        <span>Température (K)</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">x</span>
+                        <span>Fraction molaire</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">a</span>
+                        <span>Activité (J/mol)</span>
+                    </div>
+                    <div class="nomenclature-item">
+                        <span class="nomenclature-symbol">S</span>
+                        <span>Entropie (J/mol/K)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Base de données étendue avec composés organiques et inorganiques
+            const materials = [
+                // Métaux
+                { name: "Argent (Ag)", hfus: 11300, tfus: 960.85, category: "Métal", formula: "Ag" },
+                { name: "Aluminium (Al)", hfus: 10790, tfus: 660.32, category: "Métal", formula: "Al" },
+                { name: "Cuivre (Cu)", hfus: 13260, tfus: 1084.62, category: "Métal", formula: "Cu" },
+                { name: "Zinc (Zn)", hfus: 7322, tfus: 419.53, category: "Métal", formula: "Zn" },
+                { name: "Plomb (Pb)", hfus: 4770, tfus: 327.46, category: "Métal", formula: "Pb" },
+                { name: "Étain (Sn)", hfus: 7029, tfus: 231.93, category: "Métal", formula: "Sn" },
+                
+                // Semi-conducteurs
+                { name: "Silicium (Si)", hfus: 46000, tfus: 1414.85, category: "Semi-conducteur", formula: "Si" },
+                { name: "Germanium (Ge)", hfus: 31800, tfus: 938.25, category: "Semi-conducteur", formula: "Ge" },
+                
+                // Sels halogénés
+                { name: "Chlorure de potassium", hfus: 25500, tfus: 772, category: "Sel", formula: "KCl" },
+                { name: "Chlorure de lithium", hfus: 13400, tfus: 610, category: "Sel", formula: "LiCl" },
+                { name: "Chlorure de sodium", hfus: 28500, tfus: 808, category: "Sel", formula: "NaCl" },
+                { name: "Chlorure d'aluminium", hfus: 35100, tfus: 190, category: "Sel", formula: "AlCl₃" },
+                { name: "Bromure de potassium", hfus: 29300, tfus: 734, category: "Sel", formula: "KBr" },
+                { name: "Bromure de lithium", hfus: 12100, tfus: 547, category: "Sel", formula: "LiBr" },
+                { name: "Fluorure de potassium", hfus: 28500, tfus: 856, category: "Sel", formula: "KF" },
+                { name: "Fluorure de lithium", hfus: 10000, tfus: 845, category: "Sel", formula: "LiF" },
+                { name: "Fluorure de sodium", hfus: 32600, tfus: 995, category: "Sel", formula: "NaF" },
+                { name: "Iodure de sodium", hfus: 23600, tfus: 661, category: "Sel", formula: "NaI" },
+                { name: "Iodure de potassium", hfus: 24000, tfus: 681, category: "Sel", formula: "KI" },
+                
+                // Nitrates
+                { name: "Nitrate de potassium", hfus: 11700, tfus: 337, category: "Nitrate", formula: "KNO₃" },
+                { name: "Nitrate de lithium", hfus: 25500, tfus: 254, category: "Nitrate", formula: "LiNO₃" },
+                { name: "Nitrate de sodium", hfus: 15900, tfus: 310, category: "Nitrate", formula: "NaNO₃" },
+                { name: "Nitrate d'argent", hfus: 11500, tfus: 210, category: "Nitrate", formula: "AgNO₃" },
+                { name: "Nitrate de thallium", hfus: 9600, tfus: 206, category: "Nitrate", formula: "TlNO₃" },
+                { name: "Nitrate de calcium", hfus: 23400, tfus: 561, category: "Nitrate", formula: "Ca(NO₃)₂" },
+                
+                // Hydroxydes
+                { name: "Hydroxyde de potassium", hfus: 7500, tfus: 360, category: "Hydroxyde", formula: "KOH" },
+                { name: "Hydroxyde de sodium", hfus: 7100, tfus: 318, category: "Hydroxyde", formula: "NaOH" },
+                { name: "Hydroxyde de lithium", hfus: 8790, tfus: 462, category: "Hydroxyde", formula: "LiOH" },
+                
+                // Sulfates
+                { name: "Sulfate de potassium", hfus: 36700, tfus: 1074, category: "Sulfate", formula: "K₂SO₄" },
+                { name: "Sulfate de lithium", hfus: 12600, tfus: 859, category: "Sulfate", formula: "Li₂SO₄" },
+                { name: "Sulfate de sodium", hfus: 24300, tfus: 884, category: "Sulfate", formula: "Na₂SO₄" },
+                
+                // Composés organiques - Alcanes
+                { name: "n-Hexane", hfus: 13080, tfus: -95.3, category: "Alcane", formula: "C₆H₁₄" },
+                { name: "n-Heptane", hfus: 14160, tfus: -90.6, category: "Alcane", formula: "C₇H₁₆" },
+                { name: "n-Octane", hfus: 20730, tfus: -56.8, category: "Alcane", formula: "C₈H₁₈" },
+                { name: "n-Décane", hfus: 28720, tfus: -29.7, category: "Alcane", formula: "C₁₀H₂₂" },
+                { name: "n-Dodécane", hfus: 36800, tfus: -9.6, category: "Alcane", formula: "C₁₂H₂₆" },
+                { name: "n-Hexadécane", hfus: 53360, tfus: 18.2, category: "Alcane", formula: "C₁₆H₃₄" },
+                { name: "n-Eicosane", hfus: 69900, tfus: 36.8, category: "Alcane", formula: "C₂₀H₄₂" },
+                
+                // Acides carboxyliques
+                { name: "Acide acétique", hfus: 11730, tfus: 16.6, category: "Acide", formula: "CH₃COOH" },
+                { name: "Acide propionique", hfus: 10660, tfus: -20.5, category: "Acide", formula: "C₂H₅COOH" },
+                { name: "Acide butyrique", hfus: 11590, tfus: -5.1, category: "Acide", formula: "C₃H₇COOH" },
+                { name: "Acide stéarique", hfus: 61900, tfus: 69.3, category: "Acide", formula: "C₁₈H₃₆O₂" },
+                { name: "Acide palmitique", hfus: 53150, tfus: 63.1, category: "Acide", formula: "C₁₆H₃₂O₂" },
+                { name: "Acide laurique", hfus: 36300, tfus: 44.0, category: "Acide", formula: "C₁₂H₂₄O₂" },
+                { name: "Acide benzoïque", hfus: 17870, tfus: 122.4, category: "Acide", formula: "C₇H₆O₂" },
+                
+                // Alcools
+                { name: "Méthanol", hfus: 3215, tfus: -97.7, category: "Alcool", formula: "CH₃OH" },
+                { name: "Éthanol", hfus: 4931, tfus: -114.1, category: "Alcool", formula: "C₂H₅OH" },
+                { name: "Propanol-1", hfus: 5370, tfus: -126.2, category: "Alcool", formula: "C₃H₇OH" },
+                { name: "Butanol-1", hfus: 9280, tfus: -89.8, category: "Alcool", formula: "C₄H₉OH" },
+                { name: "Pentanol-1", hfus: 9850, tfus: -78.9, category: "Alcool", formula: "C₅H₁₁OH" },
+                { name: "Hexanol-1", hfus: 15380, tfus: -44.6, category: "Alcool", formula: "C₆H₁₃OH" },
+                { name: "Octanol-1", hfus: 23700, tfus: -16.7, category: "Alcool", formula: "C₈H₁₇OH" },
+                { name: "Décanol-1", hfus: 28000, tfus: 6.4, category: "Alcool", formula: "C₁₀H₂₁OH" },
+                
+                // Composés aromatiques
+                { name: "Benzène", hfus: 9870, tfus: 5.5, category: "Aromatique", formula: "C₆H₆" },
+                { name: "Toluène", hfus: 6640, tfus: -95.0, category: "Aromatique", formula: "C₇H₈" },
+                { name: "Phénol", hfus: 11510, tfus: 40.9, category: "Aromatique", formula: "C₆H₅OH" },
+                { name: "Aniline", hfus: 10540, tfus: -6.0, category: "Aromatique", formula: "C₆H₅NH₂" },
+                { name: "Naphtalène", hfus: 19290, tfus: 80.2, category: "Aromatique", formula: "C₁₀H₈" },
+                { name: "Anthracène", hfus: 28830, tfus: 218.0, category: "Aromatique", formula: "C₁₄H₁₀" },
+                
+                // Esters
+                { name: "Acétate d'éthyle", hfus: 10480, tfus: -83.6, category: "Ester", formula: "CH₃COOC₂H₅" },
+                { name: "Acétate de méthyle", hfus: 7490, tfus: -98.1, category: "Ester", formula: "CH₃COOCH₃" },
+                { name: "Acétate de butyle", hfus: 14270, tfus: -73.5, category: "Ester", formula: "CH₃COOC₄H₉" },
+                
+                // Cétones
+                { name: "Acétone", hfus: 5690, tfus: -94.7, category: "Cétone", formula: "CH₃COCH₃" },
+                { name: "Butanone (MEK)", hfus: 8440, tfus: -86.7, category: "Cétone", formula: "CH₃COC₂H₅" },
+                { name: "Cyclohexanone", hfus: 1328, tfus: -47.0, category: "Cétone", formula: "C₆H₁₀O" },
+                
+                // Éthers
+                { name: "Diéthyl éther", hfus: 7190, tfus: -116.3, category: "Éther", formula: "C₂H₅OC₂H₅" },
+                { name: "Tétrahydrofurane (THF)", hfus: 8540, tfus: -108.4, category: "Éther", formula: "C₄H₈O" },
+                
+                // Liquides ioniques et eutectiques profonds
+                { name: "Chlorure de choline", hfus: 14790, tfus: 133.0, category: "Liquide ionique", formula: "C₅H₁₄ClNO" },
+                { name: "Urée", hfus: 15300, tfus: 133.3, category: "Organique", formula: "CH₄N₂O" },
+                { name: "Glycérol", hfus: 18300, tfus: 17.8, category: "Alcool", formula: "C₃H₈O₃" },
+                { name: "Éthylène glycol", hfus: 9960, tfus: -12.9, category: "Alcool", formula: "C₂H₆O₂" },
+                { name: "Acide malique", hfus: 31500, tfus: 131.0, category: "Acide", formula: "C₄H₆O₅" },
+                { name: "Acide citrique", hfus: 39100, tfus: 156.0, category: "Acide", formula: "C₆H₈O₇" },
+                { name: "Glucose", hfus: 31400, tfus: 146.0, category: "Sucre", formula: "C₆H₁₂O₆" },
+                { name: "Fructose", hfus: 33100, tfus: 103.0, category: "Sucre", formula: "C₆H₁₂O₆" },
+                { name: "Saccharose", hfus: 35600, tfus: 186.0, category: "Sucre", formula: "C₁₂H₂₂O₁₁" },
+                
+                // Amines
+                { name: "Triéthylamine", hfus: 9200, tfus: -114.7, category: "Amine", formula: "(C₂H₅)₃N" },
+                { name: "Dipropylamine", hfus: 17100, tfus: -63.0, category: "Amine", formula: "(C₃H₇)₂NH" },
+                
+                // Composés halogénés organiques
+                { name: "Chloroforme", hfus: 8800, tfus: -63.5, category: "Halogéné", formula: "CHCl₃" },
+                { name: "Tétrachlorure de carbone", hfus: 2500, tfus: -22.9, category: "Halogéné", formula: "CCl₄" },
+                { name: "Dichlorométhane", hfus: 6200, tfus: -96.7, category: "Halogéné", formula: "CH₂Cl₂" }
+            ];
+
+            let materialDropdowns = [];
+            let dropdownCounter = 0;
+            const Rg = 8.314510; // Constante des gaz parfaits
+            const To = 273.15; // Conversion K->°C
+
+            // Initialiser avec deux dropdowns par défaut
+            function initializeDropdowns() {
+                addMaterialDropdown();
+                addMaterialDropdown();
+            }
+
+            // Créer un nouveau dropdown de matériau
+            function addMaterialDropdown() {
+                dropdownCounter++;
+                const dropdownId = `dropdown_${dropdownCounter}`;
+                
+                const $dropdown = $(`
+                    <div class="dropdown-container" data-id="${dropdownId}">
+                        <div class="dropdown-header">
+                            <label><strong>Matériau ${dropdownCounter}:</strong></label>
+                            ${dropdownCounter > 2 ? '<button class="remove-btn" onclick="removeDropdown(\'' + dropdownId + '\')">✕ Retirer</button>' : ''}
+                        </div>
+                        <input type="text" class="search-box" placeholder="Rechercher un matériau..." onkeyup="filterOptions('${dropdownId}')">
+                        <select class="material-select" onchange="updateMaterialInfo('${dropdownId}')">
+                            <option value="">Sélectionnez un matériau...</option>
+                        </select>
+                        <div class="material-info" id="info_${dropdownId}"></div>
+                    </div>
+                `);
+                
+                $('#materialDropdowns').append($dropdown);
+                populateDropdown(dropdownId);
+                materialDropdowns.push(dropdownId);
+                updateCalculateButton();
+            }
+
+            // Peupler un dropdown avec les matériaux
+            function populateDropdown(dropdownId) {
+                const $select = $(`[data-id="${dropdownId}"] .material-select`);
+                $select.find('option:not(:first)').remove();
+                
+                materials.forEach((material, index) => {
+                    const categoryClass = material.category.toLowerCase().replace(/[^a-z]/g, '');
+                    $select.append(`
+                        <option value="${index}" data-category="${material.category}">
+                            ${material.name} (${material.formula}) 
+                            - T°: ${material.tfus}°C 
+                            - H°: ${material.hfus} J/mol
+                            <span class="category-badge ${categoryClass}">${material.category}</span>
+                        </option>
+                    `);
+                });
+            }
+
+            // Filtrer les options du dropdown
+            window.filterOptions = function(dropdownId) {
+                const searchTerm = $(`[data-id="${dropdownId}"] .search-box`).val().toLowerCase();
+                const $select = $(`[data-id="${dropdownId}"] .material-select`);
+                
+                $select.find('option').each(function() {
+                    const text = $(this).text().toLowerCase();
+                    if (text.includes(searchTerm) || $(this).val() === '') {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            };
+
+            // Mettre à jour les informations du matériau sélectionné
+            window.updateMaterialInfo = function(dropdownId) {
+                const $select = $(`[data-id="${dropdownId}"] .material-select`);
+                const $info = $(`#info_${dropdownId}`);
+                const selectedIndex = $select.val();
+                
+                if (selectedIndex !== '') {
+                    const material = materials[selectedIndex];
+                    $info.html(`
+                        <strong>${material.name}</strong> (${material.formula})<br>
+                        <span class="category-badge ${material.category.toLowerCase()}">${material.category}</span><br>
+                        <strong>Température de fusion:</strong> ${material.tfus}°C<br>
+                        <strong>Enthalpie de fusion:</strong> ${material.hfus} J/mol
+                    `).addClass('show');
+                } else {
+                    $info.removeClass('show');
+                }
+                
+                updateCalculateButton();
+            };
+
+            // Retirer un dropdown
+            window.removeDropdown = function(dropdownId) {
+                $(`[data-id="${dropdownId}"]`).fadeOut(300, function() {
+                    $(this).remove();
+                    materialDropdowns = materialDropdowns.filter(id => id !== dropdownId);
+                    updateCalculateButton();
+                    renumberDropdowns();
+                });
+            };
+
+            // Renuméroter les dropdowns après suppression
+            function renumberDropdowns() {
+                $('#materialDropdowns .dropdown-container').each(function(index) {
+                    $(this).find('label').html(`<strong>Matériau ${index + 1}:</strong>`);
+                });
+            }
+
+            // Obtenir les matériaux sélectionnés
+            function getSelectedMaterials() {
+                const selected = [];
+                $('#materialDropdowns .material-select').each(function() {
+                    const index = $(this).val();
+                    if (index !== '') {
+                        selected.push(materials[index]);
+                    }
+                });
+                return selected;
+            }
+
+            // Mettre à jour le bouton de calcul
+            function updateCalculateButton() {
+                const selectedMaterials = getSelectedMaterials();
+                const $btn = $('#calculateBtn');
+                
+                if (selectedMaterials.length >= 2) {
+                    const systemType = selectedMaterials.length === 2 ? 'binaire' : 
+                                      selectedMaterials.length === 3 ? 'ternaire' : 
+                                      `${selectedMaterials.length}-aire`;
+                    $btn.prop('disabled', false).text(`Calculer l'Eutectique ${systemType} (${selectedMaterials.length} matériaux)`);
+                } else {
+                    $btn.prop('disabled', true).text('Sélectionnez au moins 2 matériaux');
+                }
+            }
+
+            // Algorithme de calcul eutectique (Newton-Raphson)
+            function calculateEutectic(materials) {
+                const n = materials.length;
+                let X = new Array(n + 1);
+                let F = new Array(n + 1);
+                let Jc = Array(n + 1).fill().map(() => Array(n + 1).fill(0));
+                let Dx = new Array(n + 1);
+                
+                // Initialisation
+                for (let i = 1; i <= n; i++) {
+                    X[i] = 1.0 / n; // Fractions molaires initiales
+                }
+                X[n] = materials[0].tfus + To; // Température initiale en K
+                
+                const relax = 0.1; // Facteur de sous-relaxation
+                const tolerance = 0.00001;
+                let maxIterations = 100;
+                let iteration = 0;
+                
+                while (iteration < maxIterations) {
+                    // Construction de la matrice jacobienne
+                    for (let i = 1; i <= n; i++) {
+                        for (let j = 1; j <= n + 1; j++) {
+                            Jc[i][j] = 0;
+                        }
+                        
+                        if (i < n) {
+                            Jc[i][i] = 1.0 / X[i];
+                        } else {
+                            let coef = 1;
+                            for (let j = 1; j < n; j++) {
+                                coef -= X[j];
+                            }
+                            for (let j = 1; j < n; j++) {
+                                Jc[j][i] = -1.0 / coef;
+                            }
+                        }
+                        
+                        const material = materials[i - 1];
+                        Jc[n][i] = -material.hfus / Rg / (X[n] * X[n]);
+                    }
+                    
+                    // Calcul des fonctions F[i]
+                    for (let i = 1; i <= n; i++) {
+                        const material = materials[i - 1];
+                        let g;
+                        
+                        if (i < n) {
+                            g = Math.log(X[i]) + material.hfus / Rg * (1.0 / X[n] - 1.0 / (material.tfus + To));
+                        } else {
+                            let coef = 1;
+                            for (let j = 1; j < n; j++) {
+                                coef -= X[j];
+                            }
+                            g = Math.log(coef) + material.hfus / Rg * (1.0 / X[n] - 1.0 / (material.tfus + To));
+                        }
+                        
+                        F[i] = g;
+                    }
+                    
+                    // Résolution du système linéaire (méthode de Gauss-Jordan simplifiée)
+                    for (let i = 1; i <= n; i++) {
+                        let u = Jc[i][i];
+                        if (Math.abs(u) < 1e-10) continue;
+                        
+                        Jc[i][i] = 1.0;
+                        for (let j = 1; j <= n; j++) {
+                            Jc[i][j] /= u;
+                        }
+                        
+                        for (let k = 1; k <= n; k++) {
+                            if (k !== i) {
+                                u = Jc[k][i];
+                                Jc[k][i] = 0;
+                                for (let l = 1; l <= n; l++) {
+                                    Jc[k][l] -= u * Jc[i][l];
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Calcul des corrections Dx
+                    for (let i = 1; i <= n; i++) {
+                        Dx[i] = 0;
+                        for (let j = 1; j <= n; j++) {
+                            Dx[i] += Jc[j][i] * F[j];
+                        }
+                    }
+                    
+                    // Mise à jour avec sous-relaxation
+                    for (let i = 1; i <= n; i++) {
+                        X[i] -= relax * Dx[i];
+                    }
+                    
+                    // Test de convergence
+                    let residue = 0;
+                    for (let i = 1; i < n; i++) {
+                        residue += Math.abs(Dx[i]);
+                    }
+                    
+                    if (residue < tolerance) {
+                        break;
+                    }
+                    
+                    iteration++;
+                }
+                
+                // Préparation des résultats
+                let results = [];
+                let totalX = 0;
+                for (let i = 1; i < n; i++) {
+                    totalX += X[i];
+                    results.push({
+                        material: materials[i - 1].name,
+                        formula: materials[i - 1].formula,
+                        fraction: X[i],
+                        hfus: materials[i - 1].hfus,
+                        tfus: materials[i - 1].tfus,
+                        category: materials[i - 1].category
+                    });
+                }
+                
+                // Dernier matériau
+                results.push({
+                    material: materials[n - 1].name,
+                    formula: materials[n - 1].formula,
+                    fraction: 1.0 - totalX,
+                    hfus: materials[n - 1].hfus,
+                    tfus: materials[n - 1].tfus,
+                    category: materials[n - 1].category
+                });
+                
+                return {
+                    temperature: X[n] - To,
+                    temperatureK: X[n],
+                    compositions: results,
+                    converged: iteration < maxIterations
+                };
+            }
+
+            // Affichage des résultats
+            function displayResults(result) {
+                const $results = $('#results');
+                const selectedMaterials = getSelectedMaterials();
+                
+                let html = '<h4>🎯 Résultats du calcul eutectique</h4>';
+                html += `<div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 10px 0;">`;
+                html += `<strong>Température eutectique: ${result.temperature.toFixed(1)}°C (${result.temperatureK.toFixed(1)}K)</strong>`;
+                html += `</div>`;
+                
+                html += `<div style="margin-top: 15px;"><strong>Compositions du système ${selectedMaterials.length}-aire:</strong></div>`;
+                
+                result.compositions.forEach(comp => {
+                    const percentage = (comp.fraction * 100).toFixed(1);
+                    const categoryClass = comp.category.toLowerCase().replace(/[^a-z]/g, '');
+                    html += `
+                        <div style="background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 5px; border-left: 3px solid #007bff;">
+                            <strong>${comp.material}</strong> (${comp.formula}): ${percentage}% molaire 
+                            <span class="category-badge ${categoryClass}">${comp.category}</span><br>
+                            <span style="color: #666; font-size: 0.9em;">
+                                H°: ${comp.hfus} J/mol, T°: ${comp.tfus}°C
+                            </span>
+                        </div>
+                    `;
+                });
+                
+                if (!result.converged) {
+                    html += '<div style="color: #dc3545; margin-top: 10px; font-style: italic;">⚠️ Attention: Le calcul n\'a pas complètement convergé</div>';
+                }
+                
+                $results.html(html);
+                $results.addClass('show');
+            }
+
+            // Mise à jour du diagramme circulaire
+            function updateCompositionDiagram(result) {
+                const $svg = $('#pieChart');
+                const $centerInfo = $('#centerInfo');
+                const $legend = $('#legend');
+                
+                // Effacer les éléments précédents
+                $svg.empty();
+                $legend.empty();
+                
+                // Afficher la température au centre
+                $('#tempValue').text(`${result.temperature.toFixed(1)}°C`);
+                
+                // Palette de couleurs distinctes pour chaque composant
+                const distinctColors = [
+                    '#e53e3e',  // Rouge
+                    '#4299e1',  // Bleu
+                    '#48bb78',  // Vert
+                    '#ed8936',  // Orange
+                    '#9f7aea',  // Violet
+                    '#38b2ac',  // Teal
+                    '#f687b3',  // Rose
+                    '#fbd38d',  // Jaune clair
+                    '#90cdf4',  // Bleu clair
+                    '#68d391',  // Vert clair
+                    '#fc8181',  // Rouge clair
+                    '#a78bfa',  // Violet clair
+                    '#4fd1c7',  // Cyan
+                    '#f6ad55',  // Orange clair
+                    '#81e6d9',  // Turquoise
+                    '#feb2b2',  // Rose clair
+                    '#c6f6d5',  // Vert très clair
+                    '#bee3f8',  // Bleu très clair
+                    '#e9d8fd',  // Violet très clair
+                    '#fed7d7'   // Rouge très clair
+                ];
+                
+                // Calculer les angles pour chaque segment
+                const total = result.compositions.reduce((sum, comp) => sum + comp.fraction, 0);
+                let currentAngle = 0; // Commencer à 0 degrés (3 heures)
+                
+                const centerX = 200;
+                const centerY = 200;
+                const radius = 140;
+                
+                console.log('Updating pie chart with', result.compositions.length, 'components');
+                
+                // Créer les segments du diagramme circulaire
+                result.compositions.forEach((comp, index) => {
+                    const percentage = comp.fraction / total;
+                    const angleRad = percentage * 2 * Math.PI;
+                    const endAngle = currentAngle + angleRad;
+                    
+                    console.log(`Component ${index}: ${comp.material}, ${(percentage * 100).toFixed(1)}%, angle: ${angleRad}`);
+                    
+                    // Assigner une couleur unique à chaque composant
+                    const color = distinctColors[index % distinctColors.length];
+                    
+                    // Calculer les coordonnées du segment
+                    const startX = centerX + radius * Math.cos(currentAngle);
+                    const startY = centerY + radius * Math.sin(currentAngle);
+                    const endX = centerX + radius * Math.cos(endAngle);
+                    const endY = centerY + radius * Math.sin(endAngle);
+                    
+                    // Créer le chemin SVG pour le segment
+                    let pathData;
+                    if (angleRad >= 2 * Math.PI) {
+                        // Cercle complet pour un seul composant
+                        pathData = `M ${centerX} ${centerY} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius*2},0 a ${radius},${radius} 0 1,1 -${radius*2},0`;
+                    } else {
+                        const largeArcFlag = angleRad > Math.PI ? 1 : 0;
+                        pathData = [
+                            `M ${centerX} ${centerY}`,
+                            `L ${startX} ${startY}`,
+                            `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`,
+                            'Z'
+                        ].join(' ');
+                    }
+                    
+                    // Créer l'élément path avec namespace SVG
+                    const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    pathElement.setAttribute('class', 'pie-slice');
+                    pathElement.setAttribute('d', pathData);
+                    pathElement.setAttribute('fill', color);
+                    pathElement.setAttribute('stroke', 'rgba(255,255,255,0.8)');
+                    pathElement.setAttribute('stroke-width', '2');
+                    pathElement.setAttribute('data-material', comp.material);
+                    pathElement.setAttribute('data-percentage', (percentage * 100).toFixed(1));
+                    
+                    $svg[0].appendChild(pathElement);
+                    
+                    // Ajouter le label du pourcentage si le segment est assez grand
+                    if (percentage > 0.05) { // Plus de 5%
+                        const labelAngle = currentAngle + angleRad / 2;
+                        const labelRadius = radius * 0.7;
+                        const labelX = centerX + labelRadius * Math.cos(labelAngle);
+                        const labelY = centerY + labelRadius * Math.sin(labelAngle);
+                        
+                        const textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        textElement.setAttribute('class', 'slice-label');
+                        textElement.setAttribute('x', labelX);
+                        textElement.setAttribute('y', labelY);
+                        textElement.setAttribute('text-anchor', 'middle');
+                        textElement.setAttribute('dominant-baseline', 'central');
+                        textElement.textContent = `${(percentage * 100).toFixed(1)}%`;
+                        
+                        $svg[0].appendChild(textElement);
+                    }
+                    
+                    currentAngle = endAngle;
+                    
+                    // Créer l'élément de légende
+                    const $legendItem = $(`
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: ${color};"></div>
+                            <span class="legend-text">${comp.material}</span>
+                            <span class="legend-percentage">${(percentage * 100).toFixed(1)}%</span>
+                        </div>
+                    `);
+                    
+                    $legend.append($legendItem);
+                });
+                
+                // Ajouter les interactions hover
+                $('.pie-slice').on('mouseenter', function(e) {
+                    const material = $(this).data('material');
+                    const percentage = $(this).data('percentage');
+                    
+                    // Mettre en surbrillance l'élément de légende correspondant
+                    $('.legend-item').removeClass('highlight');
+                    $('.legend-item').filter(function() {
+                        return $(this).find('.legend-text').text() === material;
+                    }).addClass('highlight');
+                    
+                    // Afficher tooltip
+                    showTooltip(`${material}: ${percentage}%`, e);
+                }).on('mouseleave', function() {
+                    $('.legend-item').removeClass('highlight');
+                    hideTooltip();
+                });
+            }
+            
+            // Fonctions pour tooltip
+            function showTooltip(text, event) {
+                const $tooltip = $('<div class="chart-tooltip"></div>')
+                    .text(text)
+                    .css({
+                        position: 'fixed',
+                        background: 'rgba(0,0,0,0.8)',
+                        color: 'white',
+                        padding: '8px 12px',
+                        borderRadius: '6px',
+                        fontSize: '0.9rem',
+                        zIndex: 9999,
+                        pointerEvents: 'none',
+                        left: event.pageX + 10,
+                        top: event.pageY - 10
+                    });
+                
+                $('body').append($tooltip);
+            }
+            
+            function hideTooltip() {
+                $('.chart-tooltip').remove();
+            }
+
+            // Réinitialiser l'application
+            function resetApplication() {
+                // Supprimer tous les dropdowns sauf les deux premiers
+                $('#materialDropdowns .dropdown-container').each(function(index) {
+                    if (index > 1) {
+                        $(this).remove();
+                    } else {
+                        $(this).find('.material-select').val('');
+                        $(this).find('.search-box').val('');
+                        $(this).find('.material-info').removeClass('show');
+                    }
+                });
+                
+                // Réinitialiser les variables
+                materialDropdowns = materialDropdowns.slice(0, 2);
+                
+                // Effacer les résultats
+                $('#results').removeClass('show');
+                $('#diagramContainer .eutectic-point, #diagramContainer .phase-line, #diagramContainer .label').remove();
+                
+                updateCalculateButton();
+            }
+
+            // Génération aléatoire de matériaux
+            function generateRandomSelection() {
+                const count = parseInt($('#materialCount').val());
+                const category = $('#categoryFilter').val();
+                
+                // Filtrer les matériaux selon la catégorie
+                let filteredMaterials = [];
+                
+                const inorganicCategories = ['Métal', 'Semi-conducteur', 'Sel', 'Nitrate', 'Hydroxyde', 'Sulfate'];
+                const organicCategories = ['Alcane', 'Acide', 'Alcool', 'Aromatique', 'Ester', 'Cétone', 'Éther', 
+                                          'Liquide ionique', 'Organique', 'Sucre', 'Amine', 'Halogéné'];
+                
+                switch(category) {
+                    case 'inorganic':
+                        filteredMaterials = materials.filter(m => inorganicCategories.includes(m.category));
+                        break;
+                    case 'organic':
+                        filteredMaterials = materials.filter(m => organicCategories.includes(m.category));
+                        break;
+                    case 'mixed':
+                        // Mélange: au moins 1 organique et 1 inorganique
+                        const organics = materials.filter(m => organicCategories.includes(m.category));
+                        const inorganics = materials.filter(m => inorganicCategories.includes(m.category));
+                        
+                        const selectedOrganics = getRandomElements(organics, Math.ceil(count / 2));
+                        const selectedInorganics = getRandomElements(inorganics, Math.floor(count / 2));
+                        
+                        filteredMaterials = [...selectedOrganics, ...selectedInorganics];
+                        break;
+                    default:
+                        filteredMaterials = materials;
+                }
+                
+                if (filteredMaterials.length < count) {
+                    alert(`Pas assez de matériaux dans la catégorie sélectionnée. Disponibles: ${filteredMaterials.length}`);
+                    return;
+                }
+                
+                let selectedMaterials;
+                if (category === 'mixed') {
+                    selectedMaterials = filteredMaterials.slice(0, count);
+                } else {
+                    selectedMaterials = getRandomElements(filteredMaterials, count);
+                }
+                
+                // Effacer les sélections actuelles
+                resetApplication();
+                
+                // Ajouter les dropdowns nécessaires
+                while (materialDropdowns.length < count) {
+                    addMaterialDropdown();
+                }
+                
+                // Appliquer les sélections
+                selectedMaterials.forEach((material, index) => {
+                    const materialIndex = materials.findIndex(m => m.name === material.name);
+                    const dropdownId = materialDropdowns[index];
+                    $(`[data-id="${dropdownId}"] .material-select`).val(materialIndex).trigger('change');
+                });
+                
+                // Masquer les options aléatoires
+                $('#randomOptions').removeClass('show');
+                
+                // Afficher un message de succès
+                showNotification(`🎯 Sélection aléatoire de ${count} matériaux générée !`, 'success');
+            }
+            
+            // Fonction utilitaire pour sélectionner des éléments aléatoirement
+            function getRandomElements(array, count) {
+                const shuffled = [...array].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+            
+            // Fonction pour afficher des notifications
+            function showNotification(message, type = 'info') {
+                const $notification = $(`
+                    <div class="notification ${type}" style="
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: ${type === 'success' ? 'linear-gradient(145deg, #48bb78, #38a169)' : 'linear-gradient(145deg, #4299e1, #3182ce)'};
+                        color: white;
+                        padding: 16px 24px;
+                        border-radius: 12px;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                        z-index: 9999;
+                        font-family: 'Lexend Deca', sans-serif;
+                        font-weight: 500;
+                        transform: translateX(400px);
+                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    ">${message}</div>
+                `);
+                
+                $('body').append($notification);
+                
+                // Animation d'entrée
+                setTimeout(() => {
+                    $notification.css('transform', 'translateX(0)');
+                }, 100);
+                
+                // Suppression automatique
+                setTimeout(() => {
+                    $notification.css('transform', 'translateX(400px)');
+                    setTimeout(() => $notification.remove(), 400);
+                }, 3000);
+            }
+
+            // Event listeners
+            $('#addMaterialBtn').on('click', addMaterialDropdown);
+            
+            // Gestion du bouton de sélection aléatoire
+            $('#randomBtn').on('click', function() {
+                const $options = $('#randomOptions');
+                if ($options.hasClass('show')) {
+                    $options.removeClass('show');
+                } else {
+                    $options.addClass('show');
+                }
+            });
+            
+            $('#generateBtn').on('click', generateRandomSelection);
+            
+            $('#resetBtn').on('click', function() {
+                if (confirm('Voulez-vous vraiment réinitialiser tous les paramètres ?')) {
+                    resetApplication();
+                }
+            });
+
+            $('#calculateBtn').on('click', function() {
+                const selectedMaterials = getSelectedMaterials();
+                
+                if (selectedMaterials.length < 2) {
+                    alert('Veuillez sélectionner au moins 2 matériaux.');
+                    return;
+                }
+                
+                // Vérifier les doublons
+                const names = selectedMaterials.map(m => m.name);
+                const uniqueNames = [...new Set(names)];
+                if (names.length !== uniqueNames.length) {
+                    alert('Vous ne pouvez pas sélectionner le même matériau plusieurs fois.');
+                    return;
+                }
+                
+                // Afficher le chargement
+                $('#loading').show();
+                $('#results').removeClass('show');
+                
+                // Simuler un délai de calcul
+                setTimeout(() => {
+                    try {
+                        const result = calculateEutectic(selectedMaterials);
+                        displayResults(result);
+                        updateCompositionDiagram(result);
+                    } catch (error) {
+                        $('#results').html(`
+                            <div style="color: #dc3545;">
+                                <h4>❌ Erreur de calcul</h4>
+                                <p>Une erreur est survenue lors du calcul: ${error.message}</p>
+                                <p>Vérifiez que les matériaux sélectionnés sont compatibles.</p>
+                            </div>
+                        `);
+                        $('#results').addClass('show');
+                    }
+                    
+                    $('#loading').hide();
+                }, 1000);
+            });
+
+            // Tooltip
+            $(document).on('mouseenter', '.eutectic-point', function(e) {
+                const $tooltip = $('#tooltip');
+                const text = $(this).attr('title');
+                
+                $tooltip.text(text).css({
+                    left: e.pageX + 10,
+                    top: e.pageY - 30,
+                    opacity: 1
+                });
+            });
+
+            $(document).on('mouseleave', '.eutectic-point', function() {
+                $('#tooltip').css('opacity', 0);
+            });
+
+            $(document).on('mousemove', '.eutectic-point', function(e) {
+                $('#tooltip').css({
+                    left: e.pageX + 10,
+                    top: e.pageY - 30
+                });
+            });
+
+            // Initialisation
+            initializeDropdowns();
+        });
+    </script>
+</body>
+</html>
