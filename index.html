@@ -17,9 +17,9 @@
 
         body {
             font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #1a202c 100%);
+            background: #0f172a;
             min-height: 100vh;
-            color: #f7fafc;
+            color: #cbd5e1;
             font-weight: 400;
             letter-spacing: -0.025em;
         }
@@ -32,18 +32,17 @@
 
         h1 {
             text-align: center;
-            color: #ffffff;
+            color: #f1f5f9;
             margin-bottom: 12px;
             font-size: 3.2rem;
             font-weight: 700;
             letter-spacing: -0.05em;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
             animation: fadeInDown 1s ease-out;
         }
 
         .subtitle {
             text-align: center;
-            color: #cbd5e0;
+            color: #94a3b8;
             margin-bottom: 40px;
             font-size: 1.25rem;
             font-weight: 300;
@@ -52,14 +51,14 @@
         }
 
         .main-panel {
-            background: rgba(255,255,255,0.97);
-            border-radius: 24px;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(71, 85, 105, 0.2);
             animation: slideInUp 0.8s ease-out 0.6s both;
-            color: #2d3748;
+            color: #cbd5e1;
         }
 
         .controls-section {
@@ -70,21 +69,20 @@
 
         .material-selector {
             flex: 2;
-            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+            background: rgba(15, 23, 42, 0.6);
             padding: 28px;
-            border-radius: 20px;
-            border: 1px solid rgba(113, 128, 150, 0.2);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .material-selector:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            transform: translateY(-2px);
+            border-color: rgba(71, 85, 105, 0.5);
+            transform: translateY(-1px);
         }
 
         .material-selector h3 {
-            color: #2d3748;
+            color: #f1f5f9;
             margin-bottom: 24px;
             font-size: 1.5rem;
             font-weight: 600;
@@ -95,20 +93,18 @@
         }
 
         .dropdown-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.4);
             margin: 16px 0;
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid rgba(113, 128, 150, 0.15);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(71, 85, 105, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideInRight 0.5s ease-out;
         }
 
         .dropdown-container:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            transform: translateY(-3px);
-            border-color: rgba(66, 153, 225, 0.3);
+            border-color: rgba(71, 85, 105, 0.4);
+            transform: translateY(-1px);
         }
 
         .dropdown-header {
@@ -120,29 +116,28 @@
 
         .dropdown-header label {
             font-weight: 600;
-            color: #2d3748;
+            color: #e2e8f0;
             font-size: 1.1rem;
         }
 
         .material-select {
             width: 100%;
-            padding: 16px 18px;
-            border: 2px solid rgba(113, 128, 150, 0.2);
-            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 6px;
             font-size: 1rem;
             font-family: 'Lexend Deca', sans-serif;
             font-weight: 400;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(15, 23, 42, 0.8);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            color: #2d3748;
+            color: #cbd5e1;
         }
 
         .material-select:focus {
             outline: none;
-            border-color: #4299e1;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
-            background: rgba(255, 255, 255, 1);
+            border-color: #64748b;
+            background: rgba(15, 23, 42, 1);
         }
 
         .material-select option {
@@ -151,14 +146,14 @@
 
         .material-info {
             margin-top: 16px;
-            padding: 16px;
-            background: linear-gradient(145deg, #edf2f7, #f7fafc);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            color: #4a5568;
+            padding: 12px;
+            background: rgba(51, 65, 85, 0.4);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #94a3b8;
             display: none;
             animation: fadeIn 0.3s ease;
-            border: 1px solid rgba(113, 128, 150, 0.1);
+            border: 1px solid rgba(71, 85, 105, 0.2);
         }
 
         .material-info.show {
@@ -166,155 +161,274 @@
         }
 
         .remove-btn {
-            background: linear-gradient(145deg, #f56565, #e53e3e);
-            color: white;
+            background: #475569;
+            color: #f1f5f9;
             border: none;
-            padding: 10px 16px;
-            border-radius: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
             font-family: 'Lexend Deca', sans-serif;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+            transition: all 0.3s ease;
         }
 
         .remove-btn:hover {
-            background: linear-gradient(145deg, #e53e3e, #c53030);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
-        }
-
-        .add-material-btn {
-            background: linear-gradient(145deg, #48bb78, #38a169);
-            color: white;
-            border: none;
-            padding: 18px 24px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: 'Lexend Deca', sans-serif;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            margin-top: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 4px 20px rgba(72, 187, 120, 0.3);
-        }
-
-        .add-material-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(72, 187, 120, 0.4);
-            background: linear-gradient(145deg, #38a169, #2f855a);
-        }
-
-        .random-btn {
-            background: linear-gradient(145deg, #805ad5, #6b46c1);
-            color: white;
-            border: none;
-            padding: 18px 24px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: 'Lexend Deca', sans-serif;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            margin-top: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 4px 20px rgba(128, 90, 213, 0.3);
-        }
-
-        .random-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(128, 90, 213, 0.4);
-            background: linear-gradient(145deg, #6b46c1, #553c9a);
-        }
-
-        .random-options {
-            display: none;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 12px;
-            border: 1px solid rgba(113, 128, 150, 0.2);
-            animation: slideInDown 0.3s ease-out;
-        }
-
-        .random-options.show {
-            display: block;
-        }
-
-        .random-controls {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .random-controls label {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.95rem;
-        }
-
-        .random-select {
-            padding: 8px 12px;
-            border: 2px solid rgba(113, 128, 150, 0.2);
-            border-radius: 8px;
-            font-family: 'Lexend Deca', sans-serif;
-            background: rgba(255, 255, 255, 0.9);
-            color: #2d3748;
-            font-size: 0.9rem;
-        }
-
-        .random-select:focus {
-            outline: none;
-            border-color: #805ad5;
-            box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.1);
-        }
-
-        .generate-btn {
-            background: linear-gradient(145deg, #805ad5, #6b46c1);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: 'Lexend Deca', sans-serif;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .generate-btn:hover {
-            background: linear-gradient(145deg, #6b46c1, #553c9a);
+            background: #334155;
             transform: translateY(-1px);
         }
 
-        @keyframes slideInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .add-material-btn {
+            background: #475569;
+            color: #f1f5f9;
+            border: none;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-material-btn:hover {
+            background: #334155;
+            transform: translateY(-1px);
+        }
+
+        .test-cases {
+            margin-top: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(113, 128, 150, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .test-cases h4 {
+            color: #2d3748;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .test-case-btn {
+            background: #334155;
+            color: #f1f5f9;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .test-case-btn:hover {
+            background: #475569;
+            border-color: #64748b;
+        }
+
+        .test-case-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .genetic-algorithm {
+            margin-top: 24px;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .genetic-algorithm h4 {
+            color: #cbd5e1;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .genetic-controls {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .control-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .control-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #cbd5e1;
+        }
+
+        .genetic-input, .genetic-select {
+            padding: 8px 12px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 6px;
+            font-family: 'Lexend Deca', sans-serif;
+            background: #1e293b;
+            color: #f1f5f9;
+            font-size: 0.9rem;
+            width: 120px;
+        }
+
+        .genetic-input:focus, .genetic-select:focus {
+            outline: none;
+            border-color: #64748b;
+            background: #334155;
+        }
+
+        .genetic-btn {
+            background: #334155;
+            color: #f1f5f9;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Lexend Deca', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .genetic-btn:hover {
+            background: #475569;
+            border-color: #64748b;
+        }
+
+        .genetic-btn:disabled {
+            background: #1e293b;
+            color: #64748b;
+            cursor: not-allowed;
+            border-color: rgba(71, 85, 105, 0.2);
+        }
+
+        .genetic-progress {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .genetic-progress.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(128, 90, 213, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar::before {
+            content: '';
+            display: block;
+            height: 100%;
+            background: #475569;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .genetic-results {
+            display: none;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .genetic-results.show {
+            display: block;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        .solution-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #805ad5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .solution-item:hover {
+            background: rgba(128, 90, 213, 0.05);
+            transform: translateX(5px);
+        }
+
+        .solution-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .solution-title {
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .solution-temp {
+            background: #475569;
+            color: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .solution-components {
+            font-size: 0.85rem;
+            color: #6b46c1;
+            line-height: 1.4;
         }
 
         .calculation-panel {
             flex: 1;
-            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+            background: rgba(15, 23, 42, 0.6);
             padding: 28px;
-            border-radius: 20px;
-            border: 1px solid rgba(113, 128, 150, 0.2);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
         }
 
         .calculation-panel h3 {
-            color: #2d3748;
+            color: #f1f5f9;
             margin-bottom: 24px;
             font-size: 1.5rem;
             font-weight: 600;
@@ -322,21 +436,18 @@
         }
 
         .calculate-btn {
-            background: linear-gradient(145deg, #4299e1, #3182ce);
-            color: white;
-            border: none;
-            padding: 18px 36px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            background: #1e293b;
+            color: #f1f5f9;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
             font-family: 'Lexend Deca', sans-serif;
-            border-radius: 16px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             width: 100%;
             margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 6px 25px rgba(66, 153, 225, 0.4);
             letter-spacing: -0.025em;
         }
 
@@ -359,38 +470,37 @@
         }
 
         .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(66, 153, 225, 0.5);
-            background: linear-gradient(145deg, #3182ce, #2b6cb0);
+            background: #0f172a;
+            border-color: rgba(71, 85, 105, 0.5);
+            transform: translateY(-1px);
         }
 
         .calculate-btn:disabled {
-            background: linear-gradient(145deg, #a0aec0, #718096);
+            background: #374151;
+            color: #6b7280;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
+            border-color: rgba(55, 65, 81, 0.3);
         }
 
         .reset-btn {
-            background: linear-gradient(145deg, #ed8936, #dd6b20);
-            color: white;
+            background: #64748b;
+            color: #f1f5f9;
             border: none;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
             font-family: 'Lexend Deca', sans-serif;
-            border-radius: 14px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             width: 100%;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(237, 137, 54, 0.3);
+            margin-bottom: 16px;
         }
 
         .reset-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
-            background: linear-gradient(145deg, #dd6b20, #c05621);
+            background: #475569;
+            transform: translateY(-1px);
         }
 
         .results {
@@ -783,9 +893,9 @@
         }
 
         .organic { background: #28a745; }
-        .salt { background: #dc3545; }
-        .metal { background: #6c757d; }
-        .nitrate { background: #ffc107; color: #212529; }
+        .salt { background: #475569; }
+        .metal { background: #334155; }
+        .nitrate { background: #64748b; color: #f1f5f9; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -985,31 +1095,55 @@
                         ➕ Ajouter un matériau
                     </button>
                     
-                    <button class="random-btn" id="randomBtn">
-                        🎲 Sélection aléatoire
-                    </button>
-                    
-                    <div class="random-options" id="randomOptions">
-                        <div class="random-controls">
-                            <label for="materialCount">Nombre de matériaux:</label>
-                            <select class="random-select" id="materialCount">
-                                <option value="3">3 matériaux</option>
-                                <option value="4">4 matériaux</option>
-                                <option value="5">5 matériaux</option>
-                            </select>
-                        </div>
-                        <div class="random-controls">
-                            <label for="categoryFilter">Catégorie:</label>
-                            <select class="random-select" id="categoryFilter">
-                                <option value="all">Toutes catégories</option>
-                                <option value="inorganic">Inorganiques seulement</option>
-                                <option value="organic">Organiques seulement</option>
-                                <option value="mixed">Mélange organiques/inorganiques</option>
-                            </select>
-                        </div>
-                        <button class="generate-btn" id="generateBtn">
-                            ⚡ Générer la sélection
+                    <div class="test-cases">
+                        <h4>🧪 Cas tests de la publication</h4>
+                        <button class="test-case-btn" id="testCase1">
+                            🥈 Ag-Si (Binaire)
                         </button>
+                        <button class="test-case-btn" id="testCase2">
+                            🧂 KCl-LiCl-NaCl (Ternaire)
+                        </button>
+                        <button class="test-case-btn" id="testCase3">
+                            🌋 KNO₃-LiNO₃-NaNO₃ (Ternaire)
+                        </button>
+                    </div>
+                    
+                    <div class="genetic-algorithm">
+                        <h4>🧬 Optimisation par Algorithme Génétique</h4>
+                        <div class="genetic-controls">
+                            <div class="control-group">
+                                <label for="targetTemp">Température cible (°C):</label>
+                                <input type="number" id="targetTemp" class="genetic-input" value="100" min="-200" max="1500" step="0.1">
+                            </div>
+                            <div class="control-group">
+                                <label for="minComponents">Composants min:</label>
+                                <select id="minComponents" class="genetic-select">
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="maxComponents">Composants max:</label>
+                                <select id="maxComponents" class="genetic-select">
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7" selected>7</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="genetic-btn" id="startGeneticBtn">
+                            🧠 Recherche optimale
+                        </button>
+                        <div class="genetic-progress" id="geneticProgress">
+                            <div class="progress-bar" id="progressBar"></div>
+                            <div class="progress-text" id="progressText">En attente...</div>
+                        </div>
+                        <div class="genetic-results" id="geneticResults">
+                            <!-- Résultats de l'algorithme génétique -->
+                        </div>
                     </div>
                 </div>
                 
@@ -1715,77 +1849,49 @@
                 updateCalculateButton();
             }
 
-            // Génération aléatoire de matériaux
-            function generateRandomSelection() {
-                const count = parseInt($('#materialCount').val());
-                const category = $('#categoryFilter').val();
-                
-                // Filtrer les matériaux selon la catégorie
-                let filteredMaterials = [];
-                
-                const inorganicCategories = ['Métal', 'Semi-conducteur', 'Sel', 'Nitrate', 'Hydroxyde', 'Sulfate'];
-                const organicCategories = ['Alcane', 'Acide', 'Alcool', 'Aromatique', 'Ester', 'Cétone', 'Éther', 
-                                          'Liquide ionique', 'Organique', 'Sucre', 'Amine', 'Halogéné'];
-                
-                switch(category) {
-                    case 'inorganic':
-                        filteredMaterials = materials.filter(m => inorganicCategories.includes(m.category));
-                        break;
-                    case 'organic':
-                        filteredMaterials = materials.filter(m => organicCategories.includes(m.category));
-                        break;
-                    case 'mixed':
-                        // Mélange: au moins 1 organique et 1 inorganique
-                        const organics = materials.filter(m => organicCategories.includes(m.category));
-                        const inorganics = materials.filter(m => inorganicCategories.includes(m.category));
-                        
-                        const selectedOrganics = getRandomElements(organics, Math.ceil(count / 2));
-                        const selectedInorganics = getRandomElements(inorganics, Math.floor(count / 2));
-                        
-                        filteredMaterials = [...selectedOrganics, ...selectedInorganics];
-                        break;
-                    default:
-                        filteredMaterials = materials;
+            // Cas de test de la publication
+            const testCases = {
+                case1: {
+                    name: 'Système Ag-Si (Binaire)',
+                    materials: ['Argent (Ag)', 'Silicium (Si)'],
+                    description: 'Système métal-semi-conducteur classique'
+                },
+                case2: {
+                    name: 'Système KCl-LiCl-NaCl (Ternaire)',
+                    materials: ['Chlorure de potassium', 'Chlorure de lithium', 'Chlorure de sodium'],
+                    description: 'Système de chlorures alcalins'
+                },
+                case3: {
+                    name: 'Système KNO₃-LiNO₃-NaNO₃ (Ternaire)',
+                    materials: ['Nitrate de potassium', 'Nitrate de lithium', 'Nitrate de sodium'],
+                    description: 'Système de nitrates alcalins'
                 }
+            };
+            
+            // Charger un cas de test
+            function loadTestCase(caseKey) {
+                const testCase = testCases[caseKey];
+                if (!testCase) return;
                 
-                if (filteredMaterials.length < count) {
-                    alert(`Pas assez de matériaux dans la catégorie sélectionnée. Disponibles: ${filteredMaterials.length}`);
-                    return;
-                }
-                
-                let selectedMaterials;
-                if (category === 'mixed') {
-                    selectedMaterials = filteredMaterials.slice(0, count);
-                } else {
-                    selectedMaterials = getRandomElements(filteredMaterials, count);
-                }
-                
-                // Effacer les sélections actuelles
+                // Réinitialiser l'application
                 resetApplication();
                 
                 // Ajouter les dropdowns nécessaires
-                while (materialDropdowns.length < count) {
+                while (materialDropdowns.length < testCase.materials.length) {
                     addMaterialDropdown();
                 }
                 
                 // Appliquer les sélections
-                selectedMaterials.forEach((material, index) => {
-                    const materialIndex = materials.findIndex(m => m.name === material.name);
-                    const dropdownId = materialDropdowns[index];
-                    $(`[data-id="${dropdownId}"] .material-select`).val(materialIndex).trigger('change');
+                testCase.materials.forEach((materialName, index) => {
+                    const materialIndex = materials.findIndex(m => m.name === materialName);
+                    if (materialIndex !== -1) {
+                        const dropdownId = materialDropdowns[index];
+                        $(`[data-id="${dropdownId}"] .material-select`).val(materialIndex).trigger('change');
+                    }
                 });
                 
-                // Masquer les options aléatoires
-                $('#randomOptions').removeClass('show');
-                
                 // Afficher un message de succès
-                showNotification(`🎯 Sélection aléatoire de ${count} matériaux générée !`, 'success');
-            }
-            
-            // Fonction utilitaire pour sélectionner des éléments aléatoirement
-            function getRandomElements(array, count) {
-                const shuffled = [...array].sort(() => 0.5 - Math.random());
-                return shuffled.slice(0, count);
+                showNotification(`🧪 ${testCase.name} chargé !`, 'success');
             }
             
             // Fonction pour afficher des notifications
@@ -1822,20 +1928,336 @@
                 }, 3000);
             }
 
+            // Algorithme génétique pour optimisation
+            class GeneticOptimizer {
+                constructor(targetTemp, minComp, maxComp, materials) {
+                    this.targetTemp = targetTemp;
+                    this.minComponents = minComp;
+                    this.maxComponents = maxComp;
+                    this.materials = materials;
+                    this.populationSize = 50;
+                    this.generations = 100;
+                    this.mutationRate = 0.1;
+                    this.crossoverRate = 0.8;
+                    this.eliteSize = 5;
+                }
+
+                // Créer un individu aléatoire
+                createRandomIndividual() {
+                    const numComponents = Math.floor(Math.random() * (this.maxComponents - this.minComponents + 1)) + this.minComponents;
+                    const selectedMaterials = [];
+                    const availableIndices = Array.from({length: this.materials.length}, (_, i) => i);
+                    
+                    // Sélectionner des matériaux aléatoirement
+                    for (let i = 0; i < numComponents; i++) {
+                        const randomIndex = Math.floor(Math.random() * availableIndices.length);
+                        selectedMaterials.push(availableIndices.splice(randomIndex, 1)[0]);
+                    }
+                    
+                    return selectedMaterials;
+                }
+
+                // Évaluer la fitness (1/(écart de température + 1))
+                async evaluateFitness(individual) {
+                    try {
+                        const selectedMaterials = individual.map(index => this.materials[index]);
+                        const result = calculateEutectic(selectedMaterials);
+                        
+                        if (!result.converged) {
+                            return 0.001; // Pénalité pour non-convergence
+                        }
+                        
+                        const tempDifference = Math.abs(result.temperature - this.targetTemp);
+                        return 1 / (tempDifference + 1);
+                    } catch (error) {
+                        return 0.001; // Pénalité pour erreur
+                    }
+                }
+
+                // Sélection par tournoi
+                tournamentSelection(population, fitnesses, tournamentSize = 3) {
+                    const tournament = [];
+                    for (let i = 0; i < tournamentSize; i++) {
+                        const randomIndex = Math.floor(Math.random() * population.length);
+                        tournament.push({individual: population[randomIndex], fitness: fitnesses[randomIndex], index: randomIndex});
+                    }
+                    return tournament.sort((a, b) => b.fitness - a.fitness)[0].individual;
+                }
+
+                // Croisement uniforme
+                crossover(parent1, parent2) {
+                    if (Math.random() > this.crossoverRate) return [parent1.slice(), parent2.slice()];
+                    
+                    const allMaterials = new Set([...parent1, ...parent2]);
+                    const materialsArray = Array.from(allMaterials);
+                    
+                    const child1Size = Math.min(Math.max(Math.floor(Math.random() * (this.maxComponents - this.minComponents + 1)) + this.minComponents, this.minComponents), materialsArray.length);
+                    const child2Size = Math.min(Math.max(Math.floor(Math.random() * (this.maxComponents - this.minComponents + 1)) + this.minComponents, this.minComponents), materialsArray.length);
+                    
+                    const shuffled1 = materialsArray.sort(() => 0.5 - Math.random());
+                    const shuffled2 = materialsArray.sort(() => 0.5 - Math.random());
+                    
+                    return [shuffled1.slice(0, child1Size), shuffled2.slice(0, child2Size)];
+                }
+
+                // Mutation
+                mutate(individual) {
+                    const mutated = individual.slice();
+                    
+                    if (Math.random() < this.mutationRate) {
+                        // Remplacer un matériau par un autre
+                        const randomIndex = Math.floor(Math.random() * mutated.length);
+                        let newMaterial;
+                        do {
+                            newMaterial = Math.floor(Math.random() * this.materials.length);
+                        } while (mutated.includes(newMaterial));
+                        mutated[randomIndex] = newMaterial;
+                    }
+                    
+                    if (Math.random() < this.mutationRate / 2) {
+                        // Ajouter ou retirer un matériau
+                        if (mutated.length < this.maxComponents && Math.random() < 0.5) {
+                            // Ajouter
+                            let newMaterial;
+                            do {
+                                newMaterial = Math.floor(Math.random() * this.materials.length);
+                            } while (mutated.includes(newMaterial));
+                            mutated.push(newMaterial);
+                        } else if (mutated.length > this.minComponents) {
+                            // Retirer
+                            const randomIndex = Math.floor(Math.random() * mutated.length);
+                            mutated.splice(randomIndex, 1);
+                        }
+                    }
+                    
+                    return mutated;
+                }
+
+                // Optimisation principale
+                async optimize(progressCallback) {
+                    // Population initiale
+                    let population = [];
+                    for (let i = 0; i < this.populationSize; i++) {
+                        population.push(this.createRandomIndividual());
+                    }
+
+                    let bestSolutions = [];
+
+                    for (let generation = 0; generation < this.generations; generation++) {
+                        // Évaluation de la population
+                        const fitnesses = [];
+                        for (const individual of population) {
+                            const fitness = await this.evaluateFitness(individual);
+                            fitnesses.push(fitness);
+                        }
+
+                        // Trier par fitness
+                        const sorted = population.map((ind, i) => ({individual: ind, fitness: fitnesses[i]}))
+                                                .sort((a, b) => b.fitness - a.fitness);
+
+                        // Sauvegarder les meilleures solutions
+                        if (generation % 10 === 0 || generation === this.generations - 1) {
+                            for (let i = 0; i < Math.min(3, sorted.length); i++) {
+                                const solution = {
+                                    materials: sorted[i].individual.map(idx => this.materials[idx]),
+                                    fitness: sorted[i].fitness,
+                                    generation: generation
+                                };
+                                bestSolutions.push(solution);
+                            }
+                        }
+
+                        // Progrès
+                        if (progressCallback) {
+                            progressCallback({
+                                generation: generation + 1,
+                                total: this.generations,
+                                bestFitness: sorted[0].fitness,
+                                temperature: await this.getTemperature(sorted[0].individual)
+                            });
+                        }
+
+                        // Nouvelle génération
+                        const newPopulation = [];
+                        
+                        // Élite
+                        for (let i = 0; i < this.eliteSize; i++) {
+                            newPopulation.push(sorted[i].individual.slice());
+                        }
+
+                        // Croisement et mutation
+                        while (newPopulation.length < this.populationSize) {
+                            const parent1 = this.tournamentSelection(population, fitnesses);
+                            const parent2 = this.tournamentSelection(population, fitnesses);
+                            const [child1, child2] = this.crossover(parent1, parent2);
+                            
+                            newPopulation.push(this.mutate(child1));
+                            if (newPopulation.length < this.populationSize) {
+                                newPopulation.push(this.mutate(child2));
+                            }
+                        }
+
+                        population = newPopulation;
+                    }
+
+                    // Trier les meilleures solutions uniques
+                    const uniqueSolutions = [];
+                    const seen = new Set();
+                    
+                    for (const sol of bestSolutions) {
+                        const key = sol.materials.map(m => m.name).sort().join('|');
+                        if (!seen.has(key)) {
+                            seen.add(key);
+                            sol.result = calculateEutectic(sol.materials);
+                            uniqueSolutions.push(sol);
+                        }
+                    }
+
+                    return uniqueSolutions.sort((a, b) => b.fitness - a.fitness).slice(0, 5);
+                }
+
+                async getTemperature(individual) {
+                    try {
+                        const selectedMaterials = individual.map(index => this.materials[index]);
+                        const result = calculateEutectic(selectedMaterials);
+                        return result.temperature;
+                    } catch {
+                        return null;
+                    }
+                }
+            }
+
+            // Interface utilisateur pour l'algorithme génétique
+            async function startGeneticOptimization() {
+                const targetTemp = parseFloat($('#targetTemp').val());
+                const minComp = parseInt($('#minComponents').val());
+                const maxComp = parseInt($('#maxComponents').val());
+                
+                if (isNaN(targetTemp)) {
+                    alert('Veuillez entrer une température cible valide.');
+                    return;
+                }
+                
+                if (minComp > maxComp) {
+                    alert('Le nombre minimum de composants doit être inférieur ou égal au maximum.');
+                    return;
+                }
+
+                const $btn = $('#startGeneticBtn');
+                const $progress = $('#geneticProgress');
+                const $results = $('#geneticResults');
+                const $progressBar = $('#progressBar');
+                const $progressText = $('#progressText');
+                
+                // Interface
+                $btn.prop('disabled', true).text('🧠 Optimisation en cours...');
+                $progress.addClass('active');
+                $results.removeClass('show').empty();
+                
+                const optimizer = new GeneticOptimizer(targetTemp, minComp, maxComp, materials);
+                
+                try {
+                    const solutions = await optimizer.optimize((progress) => {
+                        const percentage = (progress.generation / progress.total) * 100;
+                        $progressBar.css('--progress', percentage + '%');
+                        $progressBar[0].style.setProperty('--progress', percentage + '%');
+                        $progressText.text(`Génération ${progress.generation}/${progress.total} - Meilleure: ${progress.temperature ? progress.temperature.toFixed(1) : '?'}°C`);
+                        
+                        // Mise à jour visuelle de la barre
+                        $progressBar.find('::before').css('width', percentage + '%');
+                    });
+                    
+                    // Afficher les résultats
+                    displayGeneticResults(solutions, targetTemp);
+                    
+                } catch (error) {
+                    console.error('Erreur lors de l\'optimisation:', error);
+                    showNotification('❌ Erreur lors de l\'optimisation génétique', 'error');
+                } finally {
+                    $btn.prop('disabled', false).text('🧠 Recherche optimale');
+                    $progress.removeClass('active');
+                }
+            }
+            
+            // Afficher les résultats de l'algorithme génétique
+            function displayGeneticResults(solutions, targetTemp) {
+                const $results = $('#geneticResults');
+                $results.empty();
+                
+                if (solutions.length === 0) {
+                    $results.html('<p style="text-align: center; color: #666;">Aucune solution trouvée. Essayez avec des paramètres différents.</p>');
+                    $results.addClass('show');
+                    return;
+                }
+                
+                const $title = $('<h5>').text(`🎯 Meilleures solutions pour ${targetTemp}°C`)
+                    .css({'color': '#4c1d95', 'margin-bottom': '12px', 'text-align': 'center'});
+                $results.append($title);
+                
+                solutions.forEach((solution, index) => {
+                    const tempDiff = Math.abs(solution.result.temperature - targetTemp);
+                    const $solution = $(`
+                        <div class="solution-item" data-solution="${index}">
+                            <div class="solution-header">
+                                <span class="solution-title">Solution ${index + 1} (${solution.materials.length} composants)</span>
+                                <span class="solution-temp">${solution.result.temperature.toFixed(1)}°C (±${tempDiff.toFixed(1)})</span>
+                            </div>
+                            <div class="solution-components">
+                                ${solution.materials.map(m => m.name).join(' + ')}
+                            </div>
+                        </div>
+                    `);
+                    
+                    // Clic pour charger la solution
+                    $solution.on('click', () => loadGeneticSolution(solution));
+                    
+                    $results.append($solution);
+                });
+                
+                $results.addClass('show');
+            }
+            
+            // Charger une solution génétique
+            function loadGeneticSolution(solution) {
+                // Réinitialiser
+                resetApplication();
+                
+                // Ajouter les dropdowns
+                while (materialDropdowns.length < solution.materials.length) {
+                    addMaterialDropdown();
+                }
+                
+                // Charger les matériaux
+                solution.materials.forEach((material, index) => {
+                    const materialIndex = materials.findIndex(m => m.name === material.name);
+                    if (materialIndex !== -1) {
+                        const dropdownId = materialDropdowns[index];
+                        $(`[data-id="${dropdownId}"] .material-select`).val(materialIndex).trigger('change');
+                    }
+                });
+                
+                showNotification(`🧠 Solution génétique chargée: ${solution.result.temperature.toFixed(1)}°C`, 'success');
+            }
+
             // Event listeners
             $('#addMaterialBtn').on('click', addMaterialDropdown);
             
-            // Gestion du bouton de sélection aléatoire
-            $('#randomBtn').on('click', function() {
-                const $options = $('#randomOptions');
-                if ($options.hasClass('show')) {
-                    $options.removeClass('show');
-                } else {
-                    $options.addClass('show');
-                }
-            });
+            // Gestion des cas de test
+            $('#testCase1').on('click', () => loadTestCase('case1'));
+            $('#testCase2').on('click', () => loadTestCase('case2'));
+            $('#testCase3').on('click', () => loadTestCase('case3'));
             
-            $('#generateBtn').on('click', generateRandomSelection);
+            // Algorithme génétique
+            $('#startGeneticBtn').on('click', startGeneticOptimization);
+            
+            // Mise à jour de la barre de progrès via CSS custom property
+            const style = document.createElement('style');
+            style.textContent = `
+                .progress-bar::before {
+                    width: var(--progress, 0%);
+                }
+            `;
+            document.head.appendChild(style);
             
             $('#resetBtn').on('click', function() {
                 if (confirm('Voulez-vous vraiment réinitialiser tous les paramètres ?')) {

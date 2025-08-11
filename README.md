@@ -38,13 +38,18 @@ L'application utilise la **méthode de Newton-Raphson** pour résoudre le systè
 - **Catégories variées** : métaux, sels, organiques, etc.
 - **Sélection illimitée** de composants
 
-### 🎲 Génération aléatoire
-- **3 à 5 matériaux** sélectionnables
-- **Filtres par catégorie** :
-  - Inorganiques seulement
-  - Organiques seulement
-  - Mélange équilibré
-- **Découverte** de nouvelles combinaisons
+### 🧪 Cas de test
+- **3 systèmes de référence** de la publication originale
+- **Ag-Si** : système binaire métal-semi-conducteur
+- **KCl-LiCl-NaCl** : système ternaire de chlorures alcalins
+- **KNO₃-LiNO₃-NaNO₃** : système ternaire de nitrates alcalins
+
+### 🧠 Optimisation par algorithme génétique
+- **Recherche inverse** : spécifier une température cible
+- **Systèmes variables** : 2 à 7 composants
+- **Population de 50 individus** sur 100 générations
+- **Opérateurs évolutionnaires** : sélection par tournoi, croisement uniforme, mutation adaptative
+- **5 meilleures solutions** avec écart à la cible
 
 ### 🍰 Visualisation
 - **Diagramme circulaire** interactif
